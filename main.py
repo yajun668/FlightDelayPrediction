@@ -13,15 +13,15 @@ import math
 import matplotlib
 matplotlib.use('Agg')  # Use Agg backend
 import matplotlib.pyplot as plt
-from sympy import * #use to calulate a variable value given a function
+from sympy import * #use to calculate a variable value given a function
 import networkx as nx
 import pandas as pd
 #import python files
 import helper,delay_score,network_feature
-import prediction_model
+#import empirical_validation
 
 #Read data and Hyperparameters Settings
-# As the input_data.csv is around 2.3G, it is stored at mendeley and can be downloaded from
+# As the input_data.csv is around 2.3G, it is stored at mendeley and can be downloaded from https://data.mendeley.com/datasets/j3zfnxk56h/2
 
 df_all_data = pd.read_csv("./data/input_data.csv")
 #Large HUB airport list specified by FAA
@@ -47,7 +47,7 @@ variables_selected = ['MONTH','ORIGIN','DEST','ARR_DEL15','DISTANCE','Scheduled_
 df_processed = helper.data_preprocess(df_selected_Airport, variables_selected)
 print(df_processed.shape)
 
-# step 1: generate initial dealy score, ANSP delay score, and network centrality for months June and July 2023
+# step 1: generate initial delay score, ANSP delay score, and network centrality for months June and July 2023
 print('Step 1 is running...')
 for month in range(start_month, end_month + 1):
     # dataframe for such month
@@ -104,4 +104,6 @@ for month in range(start_month, end_month + 1):
 
 # Step 2: Integrate these features with established features in literature, and run the empirical validation
 # As empirical validation contains long code, we directly run the python file: empirical_validation.py
-import empirical_validation 
+
+print('Step 2: running empirical validation...')
+exec(open("empirical_validation.py").read())

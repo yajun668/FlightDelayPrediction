@@ -8,30 +8,7 @@ import networkx as nx
 import pandas as pd
 import numpy as np
 import math
-from sympy import * #use to calulate a variable value given a function
-
-# backup code for some special cases
-# FAA_Large=['ATL','AUS','BNA','BOS','BWI','CLT','DCA','DEN','DFW','DTW','EWR','FLL','IAD','IAH','JFK','LAS','LAX','LGA','MCO','MDW','MIA','MSP','ORD','PHL','PHX','SAN','SEA','SFO','SLC','TPA']
-# FAA_Medium=['ABQ','ANC','BDL','BOI','BUR','CHS','CLE','CMH','CVG','DAL','HNL','HOU','IND','JAX','MCI','MEM','MKE','MSY','OAK','OGG','OMA','ONT','PBI','PDX','PIT','RDU','RNO','RSW','SAT',
-#             'SJC','SJU','SMF','SNA','STL']
-# All = FAA_Large + FAA_Medium
-# Data_matrix=df_all_data[['MONTH','ORIGIN', 'DEST','DEP_DEL15', 'DEP_DELAY_NEW']]
-# Data_matrix['Delay'] = np.where(Data_matrix['DEP_DELAY_NEW'] > 0, 1, 0)
-# Data_matrix.drop('DEP_DELAY_NEW', axis=1, inplace=True)
-
-# Data_matrix['top20'] = np.where(Data_matrix['ORIGIN'].isin(Top20AP) | Data_matrix['DEST'].isin(Top20AP), 1, 0)
-# Data_matrix['Large'] = np.where(Data_matrix['ORIGIN'].isin(FAA_Large) | Data_matrix['DEST'].isin(FAA_Large), 1, 0)
-# Data_matrix['All'] = np.where(Data_matrix['ORIGIN'].isin(FAA_Large) | Data_matrix['DEST'].isin(FAA_Large) | Data_matrix['ORIGIN'].isin(FAA_Medium) | Data_matrix['DEST'].isin(FAA_Medium), 1, 0)
-
-# Topa20= Data_matrix[Data_matrix['top20'] == 1] # data related to top 20 airports
-# Topa30= Data_matrix[Data_matrix['Large'] == 1]
-# Topa64= Data_matrix[Data_matrix['All'] == 1]
-# Topa20_delay= Topa20[Topa20['Delay'] == 1]
-# Topa20_delay15= Topa20[Topa20['DEP_DEL15'] == 1]
-# Topa30_delay= Topa30[Topa30['Delay'] == 1]
-# Topa30_delay15= Topa30[Topa30['DEP_DEL15'] == 1]
-# Topa64_delay= Topa64[Topa64['Delay'] == 1]
-# Topa64_delay15= Topa64[Topa64['DEP_DEL15'] == 1]
+from sympy import * #use to calculate a variable value given a function
 
 #this function is to create top N airports matrix regarding #flights between airports
 def create_frequency_matrix(df, month, top_airports):

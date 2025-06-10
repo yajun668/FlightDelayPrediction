@@ -1,4 +1,4 @@
-#This file is to generate intial dealy score without spreading and ANSP Delay score and save results into a csv file
+#This file is to generate initial delay score without spreading and ANSP Delay score and save results into a csv file
 
 #import packages
 import time,calendar
@@ -8,7 +8,7 @@ import networkx as nx
 import pandas as pd
 import numpy as np
 import math
-from sympy import * #use to calulate a variable value given a function
+from sympy import * #use to calculate a variable value given a function
 
 # generate a delay score and save result into a csv file
 def generate_delay_score_csv_file(df, airport_list, date_range, my_alpha,my_beta,my_gamma,delay_threshold,hours_to_fly_threshold, outputname):
@@ -23,7 +23,7 @@ def generate_delay_score_csv_file(df, airport_list, date_range, my_alpha,my_beta
       #print('Matrix W: ', W)
       converged_delay_score = propagation(W, z, my_alpha)
       #print("after propagation, the z score is",converged_delay_score)
-      # convert pd dataseries data into dataframe
+      # convert pd data series data into dataframe
       df_tmp = converged_delay_score.reset_index()
       df_tmp.columns = ['Airport', 'Delay_Score']
       #add z value to df_tmp
@@ -49,7 +49,7 @@ def find_delay_vector(df, my_gamma, airport_list, delay_threshold, time_hour,my_
                        (df['Actual_ARR_dt_EST'] >= reference_datetime - pd.Timedelta(hours=delay_threshold))
                        ]
 
-  # calculate the the time (hours) passed since the actual arrival time when the flight is labelled as delay
+  # calculate the time (hours) passed since the actual arrival time when the flight is labelled as delay
 
   # Calculate the time difference in hours
   filtered_df['elapsed_hours'] = reference_datetime - filtered_df['Actual_ARR_dt_EST']
@@ -101,10 +101,6 @@ def find_Matrix_W(df, my_beta, airport_list, hours_to_fly_threshold, time_hour,m
         min_to_fly_hours = filtered_df['to_fly_hours'].min()
         W[A][B] = np.exp(-my_beta*min_to_fly_hours)
 
-  #print W
-  #print('Matrix W is: ', W)
-  # column-normalize W
-  # Convert nested dictionary values to a NumPy array
   matrix = np.array([list(inner_dict.values()) for inner_dict in W.values()])
 
   # Column-normalize the matrix
@@ -114,9 +110,7 @@ def find_Matrix_W(df, my_beta, airport_list, hours_to_fly_threshold, time_hour,m
   # Update the original dictionary with the normalized values
   for i, (key, inner_dict) in enumerate(W.items()):
       W[key] = {inner_key: normalized_matrix[i, j] for j, inner_key in enumerate(inner_dict.keys())}
-
   return W
-
 
 #propagation function
 def propagation(W,z,alpha):
@@ -131,7 +125,7 @@ def propagation(W,z,alpha):
 
   prior_ksi = df_z.copy()
   current_ksi = df_z.copy()
-  # if itermation reached max or diff<epsilon, the while loop terminates
+  # if iteration reached max or diff<epsilon, the while loop terminates
   while iter_k < max_iteration and diff > epsilon:
     iter_k += 1
     current_ksi = alpha * np.dot(df_W,prior_ksi) + (1-alpha)*df_z
