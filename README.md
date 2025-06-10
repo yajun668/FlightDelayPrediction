@@ -1,18 +1,20 @@
 # Flight Departure Delay Prediction
 The code accompanies the paper "Flight Delay Dynamics: Unraveling the Impact of Airport-Network-Spilled Propagation on Airline On-Time Performance". If you wish to use or cite this code, please cite the paper:
 
-    @article{LuTanWang224airline,
+    @article{TanLuWang2025airline,
 	  title={Flight Delay Dynamics: Unraveling the Impact of Airport-Network-Spilled Propagation on Airline On-Time Performance},
-	  author={Lu, Yajun and Tan, Yi and Wang, Lu},
-       year={2024},
-       note = {Under Review}
+	  author={Tan, Yi, Lu, Yajun and Wang, Lu},
+       year={2025},
+       note = {Conditionally Accepted at Decision Support Systems}
     }
 
 
+# Dataset
+This dataset draws upon three primary sources of data for the empirical experiments. Airport classification data is obtained from the Federal Aviation Administration (FAA). The airline on-time performance data, encompassing all domestic flights within the U.S., is collected from the Bureau of Transportation Statistics (BTS) of the U.S. Department of Transportation. This research also incorporates detailed airport-specific weather data, which we sourced from the Iowa Environmental Mesonet (IEM), administered by Iowa State University. Due to the large file size, the full dataset can be downloaded from Mendeley Data at https://data.mendeley.com/datasets/j3zfnxk56h/2
 
 # MIT License
 
-Copyright (c) 2024 Yajun Lu, Yi Tan, and Lu Wang
+Copyright (c) 2025 Yi Tan, Yajun Lu, and Lu Wang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
