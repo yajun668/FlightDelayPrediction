@@ -37,7 +37,7 @@ beta = 2.3
 gamma = 0.9
 
 # data merge and preprocessing
-df_all_data = pd.read_csv("c:\\airline\\data\\Data0715.csv")
+df_all_data = pd.read_csv(f"./data/input_data.csv")
 
 # Focus on Jun. & Jul 2023, and keep only Large hub airports
 Top30AP = np.unique(df_all_data[df_all_data.FAA_class == "Lrg"].ORIGIN)
@@ -47,15 +47,21 @@ df = df[(df['ORIGIN'].isin(Top30AP)) & (df['DEST'].isin(Top30AP))]
 df['Scheduled_DEP_EST_adj'] = df['Scheduled_DEP_EST'].astype('datetime64[h]')
 
 # network centrality data
-net_var1 = pd.read_csv("C:\\airline\\data\\network features\\network_feature_month="+str(month)+".csv")
+net_var1 = pd.read_csv(f"./data/network_feature/network_feature_month={month}.csv")
+net_var1 = net_var1.set_index(net_var1.columns[0]).T
+net_var1.reset_index(inplace=True)
+net_var1.rename(columns={'index': 'Airport'}, inplace=True)
 net_var1['month'] = month
-net_var2 = pd.read_csv("C:\\airline\\data\\network features\\network_feature_month="+str(month+1)+".csv")
+net_var2 = pd.read_csv(f"./data/network_feature/network_feature_month={month+1}.csv")
+net_var2 = net_var2.set_index(net_var2.columns[0]).T
+net_var2.reset_index(inplace=True)
+net_var2.rename(columns={'index': 'Airport'}, inplace=True)
 net_var2['month'] = month + 1
 net_var = pd.concat([net_var1, net_var2], axis=0)
 
 # ANSP score
-delay_score1 = pd.read_csv("C:\\airline\\data\\delay score\\month="+str(month)+"alpha="+str(alpha)+"beta="+str(beta)+"gamma="+str(gamma)+"delay_score.csv")
-delay_score2 = pd.read_csv("C:\\airline\\data\\delay score\\month="+str(month+1)+"alpha="+str(alpha)+"beta="+str(beta)+"gamma="+str(gamma)+"delay_score.csv")
+delay_score1 = pd.read_csv(f"./data/delay_score/month="+str(month)+"alpha="+str(alpha)+"beta="+str(beta)+"gamma="+str(gamma)+"delay_score.csv")
+delay_score2 = pd.read_csv(f"./data/delay_score/month="+str(month+1)+"alpha="+str(alpha)+"beta="+str(beta)+"gamma="+str(gamma)+"delay_score.csv")
 delay_score = pd.concat([delay_score1, delay_score2], axis=0)
 delay_score['post2_Datetime'] = pd.to_datetime(delay_score['Datetime']) + timedelta(hours=2)
 delay_score['post3_Datetime'] = pd.to_datetime(delay_score['Datetime']) + timedelta(hours=3)
