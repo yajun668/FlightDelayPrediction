@@ -3,9 +3,10 @@ The code accompanies the paper "Flight Delay Dynamics: Unraveling the Impact of 
 
     @article{TanLuWang2025airline,
 	  title={Flight Delay Dynamics: Unraveling the Impact of Airport-Network-Spilled Propagation on Airline On-Time Performance},
-	  author={Tan, Yi, Lu, Yajun and Wang, Lu},
+	  author={Tan, Yi and Lu, Yajun and Wang, Lu},
        year={2025},
-       note = {Conditionally Accepted at Decision Support Systems}
+       journal={Decision Support Systems},
+       DOI = {https://doi.org/10.1016/j.dss.2025.114494}
     }
 
 
